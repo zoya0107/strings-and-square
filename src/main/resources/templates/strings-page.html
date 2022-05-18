@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strings</title>
+</head>
+<body>
+<form th:action="@{/home/strings}" th:object="${strings}" method="POST">
+    <div>
+        <label>Please insert the strings of the first array, separated by spaces: </label>
+        <input type="text" style="width:400px;" th:field="*{s1}"
+               class="form-control mb-4 col-4">
+        <br>
+        <label>Please insert the strings of the second array, separated by spaces: </label>
+        <input type="text" style="width:400px;" th:field="*{s2}"
+               class="form-control mb-4 col-4">
+    </div>
+
+    <p>
+        <label>To modify the first array so it contains only the substrings of the second one, press </label>
+        <input type="submit" class="button" name="stringstask" value="filter"/>
+        <br>
+        <label>To save this task to the database press </label>
+        <input type="submit" class="button" name="savestrings" value="save"/>
+    </p>
+    <p style="color: fuchsia" th:text="'The substrings are: ' + ${result}"></p>
+    <br>
+    <a th:href="@{/home}">Back</a>
+</form>
+</body>
+</html>
