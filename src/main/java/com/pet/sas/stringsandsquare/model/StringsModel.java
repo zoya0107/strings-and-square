@@ -1,5 +1,6 @@
 package com.pet.sas.stringsandsquare.model;
 
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "strings")
+@Data
 public class StringsModel {
     @Id
     private Long id;
@@ -25,15 +27,4 @@ public class StringsModel {
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private TypeModel type;
 
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
 }
