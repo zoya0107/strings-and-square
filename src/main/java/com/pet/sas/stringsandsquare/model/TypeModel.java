@@ -1,9 +1,12 @@
 package com.pet.sas.stringsandsquare.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "task_type")
+@Data
 public class TypeModel {
     @Id
     @SequenceGenerator(
@@ -18,6 +21,7 @@ public class TypeModel {
     private Long id;
 
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private TaskType type;
 
     @OneToOne
@@ -27,4 +31,5 @@ public class TypeModel {
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private StringsModel strings;
+
 }

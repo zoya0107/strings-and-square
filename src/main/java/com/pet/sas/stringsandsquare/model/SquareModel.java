@@ -1,5 +1,6 @@
 package com.pet.sas.stringsandsquare.model;
 
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "square")
+@Data
 public class SquareModel {
     @Id
     private Long id;
@@ -37,9 +39,5 @@ public class SquareModel {
     @OneToOne(mappedBy = "square")
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private TypeModel type;
-
-    public Long getId() {
-        return id;
-    }
 
 }

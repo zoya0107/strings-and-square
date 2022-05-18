@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Square</title>
+</head>
+<body>
+
+<form th:action="@{/home/square}" th:object="${square}" method="POST">
+    <div>
+        <table style="width:25%;">
+            <tr>
+                <td style="text-align: left;">
+                    <label>Number 1: </label>
+                    <input type="text" style="width:30px;" th:field="*{a1}"
+                           class="form-control mb-4 col-4">
+                </td>
+                <td style="text-align: right;">
+                    <label>Number 2: </label>
+                    <input type="text" style="width:30px;" th:field="*{a2}"
+                           class="form-control mb-4 col-4">
+                </td>
+                <td style="text-align: right;">
+                    <label>Number 3: </label>
+                    <input type="text" style="width:30px;" th:field="*{a3}"
+                           class="form-control mb-4 col-4">
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <label>Number 4: </label>
+                    <input type="text" style="width:30px;" th:field="*{a4}"
+                           class="form-control mb-4 col-4">
+                </td>
+                <td style="text-align: right;">
+                    <label>Number 5: </label>
+                    <input type="text" style="width:30px;" th:field="*{a5}"
+                           class="form-control mb-4 col-4">
+                </td>
+                <td style="text-align: right;">
+                    <label>Number 6: </label>
+                    <input type="text" style="width:30px;" th:field="*{a6}"
+                           class="form-control mb-4 col-4">
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <label>Number 7: </label>
+                    <input type="text" style="width:30px;" th:field="*{a7}"
+                           class="form-control mb-4 col-4">
+                </td>
+                <td style="text-align: right;">
+                    <label>Number 8: </label>
+                    <input type="text" style="width:30px;" th:field="*{a8}"
+                           class="form-control mb-4 col-4">
+                </td>
+                <td style="text-align: right;">
+                    <label>Number 9: </label>
+                    <input type="text" style="width:30px;" th:field="*{a9}"
+                           class="form-control mb-4 col-4">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <p>
+        <label>To calculate the cost of converting this square into a magic one press </label>
+        <input type="submit" class="button" name="squaretask" value="make magic"/>
+        <br>
+        <label>To save this task to the database press </label>
+        <input type="submit" class="button" name="savesquare" value="save"/>
+    </p>
+    <p style="color: fuchsia" th:text="'The cost is: ' + ${result}"></p>
+    <br>
+    <a th:href="@{/home}">Back</a>
+</form>
+</body>
+</html>
