@@ -18,12 +18,17 @@
 
     <p>
         <label>To modify the first array so it contains only the substrings of the second one, press </label>
-        <input type="submit" class="button" name="stringstask" value="filter"/>
+        <input type="submit" class="button" name="calculate" value="filter"/>
         <br>
         <label>To save this task to the database press </label>
-        <input type="submit" class="button" name="savestrings" value="save"/>
+        <input type="submit" class="button" name="save" value="save"/>
     </p>
     <p style="color: fuchsia" th:text="'The substrings are: ' + ${result}"></p>
+    <br>
+
+    <label>To export the data from input fields to text file press </label>
+    <input type="submit" class="button" name="export" value="export"/>
+
     <br>
     <a th:href="@{/home}">Back</a>
 </form>
