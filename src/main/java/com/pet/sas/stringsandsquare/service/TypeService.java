@@ -1,5 +1,6 @@
 package com.pet.sas.stringsandsquare.service;
 
+import com.pet.sas.stringsandsquare.model.TypeModel;
 import com.pet.sas.stringsandsquare.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,5 +12,9 @@ public class TypeService {
     @Autowired
     public TypeService(TypeRepository typeRepository) {
         this.typeRepository = typeRepository;
+    }
+
+    public void saveType(TypeModel typeModel) {
+        this.typeRepository.save(typeModel);
     }
 }
