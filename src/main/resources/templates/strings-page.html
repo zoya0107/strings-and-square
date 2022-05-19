@@ -5,7 +5,7 @@
     <title>Strings</title>
 </head>
 <body>
-<form th:action="@{/home/strings}" th:object="${strings}" method="POST">
+<form th:action="@{/home/strings}" th:object="${strings}" enctype="multipart/form-data" method="POST">
     <div>
         <label>Please insert the strings of the first array, separated by spaces: </label>
         <input type="text" style="width:400px;" th:field="*{s1}"
@@ -15,17 +15,70 @@
         <input type="text" style="width:400px;" th:field="*{s2}"
                class="form-control mb-4 col-4">
     </div>
-
+    <p style="color: fuchsia" th:text="'The substrings are: ' + ${result}"></p>
     <p>
         <label>To modify the first array so it contains only the substrings of the second one, press </label>
-        <input type="submit" class="button" name="stringstask" value="filter"/>
-        <br>
-        <label>To save this task to the database press </label>
-        <input type="submit" class="button" name="savestrings" value="save"/>
+        <input type="submit" class="button" name="calculate" value="filter"/>
     </p>
-    <p style="color: fuchsia" th:text="'The substrings are: ' + ${result}"></p>
-    <br>
-    <a th:href="@{/home}">Back</a>
+    <p>
+        <label>To save this task to the database press </label>
+        <input type="submit" class="button" name="save" value="save"/>
+    </p>
+    <p>
+        <label>To export the data from input fields to text file press </label>
+        <input type="submit" class="button" name="export" value="export"/>
+    </p>
 </form>
+
+<label>To choose the data from the database and calculate the cost press </label>
+<button type="button" id="open">load</button>
+<dialog id="dialog" open style="width: 80%">
+    <h4>Strings</h4>
+    <table class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>First array</th>
+            <th>Second array</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="strings : ${listStrings}">
+            <td><a th:href="@{/home/strings/{id}(id=${strings.id})}">Select</a></td>
+            <td th:text="${strings.s1}"></td>
+            <td th:text="${strings.s2}"></td>
+            <td th:text="${strings.date}"></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <button type="button" id="close">Close</button>
+</dialog>
+<p>
+    <a th:href="@{/home}">Back</a>
+</p>
 </body>
 </html>
+<script>
+    (function () {
+        var openButton = document.getElementById('open');
+        var closeButton = document.getElementById('close');
+        var dialog = document.getElementById('dialog');
+
+        openButton.addEventListener('click', function () {
+            dialog.showModal();
+        });
+
+        closeButton.addEventListener('click', function () {
+            dialog.close();
+        });
+    })();
+
+    function preloadFunc() {
+        var dialog = document.getElementById('dialog');
+        dialog.close();
+    }
+
+    window.onpaint = preloadFunc();
+</script>

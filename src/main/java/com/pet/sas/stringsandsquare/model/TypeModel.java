@@ -1,5 +1,6 @@
 package com.pet.sas.stringsandsquare.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class TypeModel {
             strategy = GenerationType.SEQUENCE,
             generator = "order_sequence"
     )
+    @JsonIgnore
     private Long id;
 
     @Column(name = "type")
@@ -26,10 +28,12 @@ public class TypeModel {
 
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonIgnore
     private SquareModel square;
 
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonIgnore
     private StringsModel strings;
 
 }

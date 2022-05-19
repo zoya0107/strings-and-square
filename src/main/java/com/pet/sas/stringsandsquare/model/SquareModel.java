@@ -1,5 +1,6 @@
 package com.pet.sas.stringsandsquare.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,10 +12,12 @@ import java.time.LocalDate;
 @Data
 public class SquareModel {
     @Id
+    @JsonIgnore
     private Long id;
 
     @Column(name = "date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonIgnore
     private LocalDate date;
 
     @Column(name = "a1")
@@ -38,6 +41,7 @@ public class SquareModel {
 
     @OneToOne(mappedBy = "square")
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonIgnore
     private TypeModel type;
 
 }
