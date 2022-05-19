@@ -11,9 +11,7 @@ import com.pet.sas.stringsandsquare.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -70,6 +68,14 @@ public class SquareController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "square-page";
+    }
+
+    @GetMapping("/{id}")
+    public String solveSquare(@PathVariable(value = "id") Long id, Model model) {
+        SquareModel squareModel = squareService.getSquareById(id);
+        model.addAttribute("square", squareModel);
+        model.addAttribute("listSquare", squareService.getSquaresList());
         return "square-page";
     }
 }

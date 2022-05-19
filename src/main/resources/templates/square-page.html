@@ -62,22 +62,86 @@
             </tr>
         </table>
     </div>
-
+    <p style="color: fuchsia" th:text="'The cost is: ' + ${result}"></p>
     <p>
         <label>To calculate the cost of converting this square into a magic one press </label>
         <input type="submit" class="button" name="calculate" value="make magic"/>
-        <br>
+    </p>
+    <p>
         <label>To save this task to the database press </label>
         <input type="submit" class="button" name="save" value="save"/>
     </p>
-    <p style="color: fuchsia" th:text="'The cost is: ' + ${result}"></p>
-    <br>
-
-    <label>To export the data from input fields to text file press </label>
-    <input type="submit" class="button" name="export" value="export"/>
-
-    <br>
-    <a th:href="@{/home}">Back</a>
+    <p>
+        <label>To export the data from input fields to text file press </label>
+        <input type="submit" class="button" name="export" value="export"/>
+    </p>
 </form>
+<label>To choose the data from the database and calculate the cost press </label>
+<button type="button" id="open">load</button>
+<dialog id="dialog" open style="width: 80%">
+    <h3>List of saved tasks</h3>
+    <hr>
+    <div style="float:left; width:100%;">
+        <h4>Squares</h4>
+        <table class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Num. 1</th>
+                <th>Num. 2</th>
+                <th>Num. 3</th>
+                <th>Num. 4</th>
+                <th>Num. 5</th>
+                <th>Num. 6</th>
+                <th>Num. 7</th>
+                <th>Num. 8</th>
+                <th>Num. 9</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="square : ${listSquares}">
+                <td><a th:href="@{/home/square/{id}(id=${square.id})}">Select</a></td>
+                <td th:text="${square.a1}"></td>
+                <td th:text="${square.a2}"></td>
+                <td th:text="${square.a3}"></td>
+                <td th:text="${square.a4}"></td>
+                <td th:text="${square.a5}"></td>
+                <td th:text="${square.a6}"></td>
+                <td th:text="${square.a7}"></td>
+                <td th:text="${square.a8}"></td>
+                <td th:text="${square.a9}"></td>
+                <td th:text="${square.date}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" id="close">Close</button>
+</dialog>
+<p>
+    <a th:href="@{/home}">Back</a>
+</p>
 </body>
 </html>
+<script>
+    (function () {
+        var openButton = document.getElementById('open');
+        var closeButton = document.getElementById('close');
+        var dialog = document.getElementById('dialog');
+
+        openButton.addEventListener('click', function () {
+            dialog.showModal();
+        });
+
+        closeButton.addEventListener('click', function () {
+            dialog.close();
+        });
+    })();
+
+    function preloadFunc() {
+        var dialog = document.getElementById('dialog');
+        dialog.close();
+    }
+
+    window.onpaint = preloadFunc();
+</script>
