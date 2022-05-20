@@ -43,18 +43,27 @@ public class SquareController {
         squareModel.setId(typeModel.getId());
         squareModel.setDate(LocalDate.now());
         squareService.saveSquare(squareModel);
+        model.addAttribute("listSquares", squareService.getSquaresList());
         return "redirect:/home/square";
     }
 
     @PostMapping(params = "calculate")
     public String calculateCost(@ModelAttribute("square") SquareModel squareModel, Model model) {
         model.addAttribute("result", squareTask.costOfMagicSquare(squareModel));
+        model.addAttribute("listSquares", squareService.getSquaresList());
+        return "square-page";
+    }
+
+    @PostMapping(params = "semi-calculate")
+    public String calculateSemiCost(@ModelAttribute("square") SquareModel squareModel, Model model) {
+        model.addAttribute("result", squareTask.costOfSemiMagicSquare(squareModel));
+        model.addAttribute("listSquares", squareService.getSquaresList());
         return "square-page";
     }
 
     @PostMapping(params = "export")
     public String exportTheSquare(@ModelAttribute("square") SquareModel squareModel,
-                                  @ModelAttribute("type") TypeModel typeModel) {
+                                  @ModelAttribute("type") TypeModel typeModel, Model model) {
         typeModel.setType(TaskType.SQUARE);
         File file = new File("target/square.json");
         ObjectMapper objectMapper = new ObjectMapper();
@@ -68,6 +77,7 @@ public class SquareController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        model.addAttribute("listSquares", squareService.getSquaresList());
         return "square-page";
     }
 
