@@ -1,126 +1,189 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/yeti/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootlint@1.1.0/dist/browser/bootlint.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Square</title>
 </head>
 <body>
-
-<form th:action="@{/home/square}" th:object="${square}" method="POST">
-    <div>
-        <table style="width:25%;">
-            <tr>
-                <td style="text-align: left;">
-                    <label>Number 1: </label>
-                    <input type="text" style="width:30px;" th:field="*{a1}"
-                           class="form-control mb-4 col-4">
-                </td>
-                <td style="text-align: right;">
-                    <label>Number 2: </label>
-                    <input type="text" style="width:30px;" th:field="*{a2}"
-                           class="form-control mb-4 col-4">
-                </td>
-                <td style="text-align: right;">
-                    <label>Number 3: </label>
-                    <input type="text" style="width:30px;" th:field="*{a3}"
-                           class="form-control mb-4 col-4">
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">
-                    <label>Number 4: </label>
-                    <input type="text" style="width:30px;" th:field="*{a4}"
-                           class="form-control mb-4 col-4">
-                </td>
-                <td style="text-align: right;">
-                    <label>Number 5: </label>
-                    <input type="text" style="width:30px;" th:field="*{a5}"
-                           class="form-control mb-4 col-4">
-                </td>
-                <td style="text-align: right;">
-                    <label>Number 6: </label>
-                    <input type="text" style="width:30px;" th:field="*{a6}"
-                           class="form-control mb-4 col-4">
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">
-                    <label>Number 7: </label>
-                    <input type="text" style="width:30px;" th:field="*{a7}"
-                           class="form-control mb-4 col-4">
-                </td>
-                <td style="text-align: right;">
-                    <label>Number 8: </label>
-                    <input type="text" style="width:30px;" th:field="*{a8}"
-                           class="form-control mb-4 col-4">
-                </td>
-                <td style="text-align: right;">
-                    <label>Number 9: </label>
-                    <input type="text" style="width:30px;" th:field="*{a9}"
-                           class="form-control mb-4 col-4">
-                </td>
-            </tr>
-        </table>
-    </div>
-    <p style="color: fuchsia" th:text="'The cost is: ' + ${result}"></p>
+<div id="main-window" class="container col-10">
+    <form th:action="@{/home/square}" th:object="${square}" method="POST">
+        <div>
+            <div>
+                <h2>
+                    <b>
+                        Square
+                    </b>
+                </h2>
+            </div>
+            <div id="input-table">
+                <table>
+                    <tr>
+                        <td>
+                            <div>
+                                <label>Number 1</label>
+                                <input type="text" style="width:40%;" th:field="*{a1}"
+                                       class="form-control mb-4 col-4">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 2</label>
+                                <input type="text" style="width:40%;" th:field="*{a2}"
+                                       class="form-control mb-4 col-4">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 3</label>
+                                <input type="text" style="width:40%;" th:field="*{a3}"
+                                       class="form-control mb-4 col-4">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <label>Number 4</label>
+                                <input type="text" style="width:40%;" th:field="*{a4}"
+                                       class="form-control mb-4 col-4">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 5</label>
+                                <input type="text" style="width:40%;" th:field="*{a5}"
+                                       class="form-control mb-4 col-4">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 6</label>
+                                <input type="text" style="width:40%;" th:field="*{a6}"
+                                       class="form-control mb-4 col-4">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <label>Number 7</label>
+                                <input type="text" style="width:40%;" th:field="*{a7}"
+                                       class="form-control mb-4 col-4">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 8</label>
+                                <input type="text" style="width:40%;" th:field="*{a8}"
+                                       class="form-control mb-4 col-4">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 9</label>
+                                <input type="text" style="width:40%;" th:field="*{a9}"
+                                       class="form-control mb-4 col-4">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div>
+            <h5 style="color: #0048ff">
+                <b>
+                    The cost is
+                    <input type="text" style="width:5%;" th:value="${result}" readonly="readonly">
+                </b>
+            </h5>
+        </div>
+        <br>
+        <div id="controller-bar">
+            <table>
+                <tr>
+                    <td>
+                        <input type="submit" class="button form-control mb-10 col-15" name="calculate"
+                               value="make magic" style="background-color: paleturquoise"/>
+                    </td>
+                    <td width="10px"></td>
+                    <td>
+                        <input type="submit" class="button form-control mb-10 col-15" name="semi-calculate"
+                               value="make semi-magic" style="background-color: paleturquoise"/>
+                    </td>
+                    <td width="10px"></td>
+                    <td>
+                        <input type="submit" class="button form-control mb-10 col-15" name="save" value="save"
+                               style="background-color: paleturquoise"/>
+                    </td>
+                    <td width="10px"></td>
+                    <td>
+                        <button id="open" type="button" class="form-control mb-10 col-15"
+                                style="background-color: paleturquoise">load
+                        </button>
+                    </td>
+                    <td width="10px"></td>
+                    <td>
+                        <input type="submit" class="button form-control mb-10 col-15" name="export" value="export"
+                               style="background-color: paleturquoise"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <dialog id="dialog" open style="width: 80%">
+        <h3>List of saved tasks</h3>
+        <hr>
+        <div style="float:left; width:100%;">
+            <h4>Squares</h4>
+            <table class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th>Num. 1</th>
+                    <th>Num. 2</th>
+                    <th>Num. 3</th>
+                    <th>Num. 4</th>
+                    <th>Num. 5</th>
+                    <th>Num. 6</th>
+                    <th>Num. 7</th>
+                    <th>Num. 8</th>
+                    <th>Num. 9</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="square : ${listSquares}">
+                    <td><a th:href="@{/home/square/{id}(id=${square.id})}">Select</a></td>
+                    <td th:text="${square.a1}"></td>
+                    <td th:text="${square.a2}"></td>
+                    <td th:text="${square.a3}"></td>
+                    <td th:text="${square.a4}"></td>
+                    <td th:text="${square.a5}"></td>
+                    <td th:text="${square.a6}"></td>
+                    <td th:text="${square.a7}"></td>
+                    <td th:text="${square.a8}"></td>
+                    <td th:text="${square.a9}"></td>
+                    <td th:text="${square.date}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="button" id="close">Close</button>
+    </dialog>
+    <br>
     <p>
-        <label>To calculate the cost of converting this square into a magic one press </label>
-        <input type="submit" class="button" name="calculate" value="make magic"/>
+        <a th:href="@{/home}">Back</a>
     </p>
-    <p>
-        <label>To save this task to the database press </label>
-        <input type="submit" class="button" name="save" value="save"/>
-    </p>
-    <p>
-        <label>To export the data from input fields to text file press </label>
-        <input type="submit" class="button" name="export" value="export"/>
-    </p>
-</form>
-<label>To choose the data from the database and calculate the cost press </label>
-<button type="button" id="open">load</button>
-<dialog id="dialog" open style="width: 80%">
-    <h3>List of saved tasks</h3>
-    <hr>
-    <div style="float:left; width:100%;">
-        <h4>Squares</h4>
-        <table class="table table-striped table-responsive-md">
-            <thead>
-            <tr>
-                <th>Num. 1</th>
-                <th>Num. 2</th>
-                <th>Num. 3</th>
-                <th>Num. 4</th>
-                <th>Num. 5</th>
-                <th>Num. 6</th>
-                <th>Num. 7</th>
-                <th>Num. 8</th>
-                <th>Num. 9</th>
-                <th>Date</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="square : ${listSquares}">
-                <td><a th:href="@{/home/square/{id}(id=${square.id})}">Select</a></td>
-                <td th:text="${square.a1}"></td>
-                <td th:text="${square.a2}"></td>
-                <td th:text="${square.a3}"></td>
-                <td th:text="${square.a4}"></td>
-                <td th:text="${square.a5}"></td>
-                <td th:text="${square.a6}"></td>
-                <td th:text="${square.a7}"></td>
-                <td th:text="${square.a8}"></td>
-                <td th:text="${square.a9}"></td>
-                <td th:text="${square.date}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <button type="button" id="close">Close</button>
-</dialog>
-<p>
-    <a th:href="@{/home}">Back</a>
-</p>
+</div>
 </body>
 </html>
 <script>
@@ -137,11 +200,9 @@
             dialog.close();
         });
     })();
-
     function preloadFunc() {
         var dialog = document.getElementById('dialog');
         dialog.close();
     }
-
     window.onpaint = preloadFunc();
 </script>
