@@ -47,7 +47,7 @@ public class StringsController {
 
     @PostMapping(params = "calculate")
     public String filterTheStrings(@ModelAttribute("strings") StringsModel stringsModel, Model model) {
-        model.addAttribute("result", stringsTask.substrings(stringsModel));
+        model.addAttribute("result", stringsTask.getSubstrings(stringsModel));
         model.addAttribute("listStrings", stringsService.getStringsList());
         return "strings-page";
     }
@@ -56,8 +56,11 @@ public class StringsController {
     public String exportTheStrings(@ModelAttribute("strings") StringsModel stringsModel,
                                    @ModelAttribute("type") TypeModel typeModel, Model model) {
         typeModel.setType(TaskType.STRINGS);
-        File file = new File("target/strings.json");
-
+        File theDir = new File("C://data_sas");
+        if (!theDir.exists()) {
+            theDir.mkdirs();
+        }
+        File file = new File(theDir, "strings.json");
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> taskMap = new HashMap<>();
         taskMap.put("strings", stringsModel);

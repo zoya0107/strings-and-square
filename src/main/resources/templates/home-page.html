@@ -13,27 +13,28 @@
     <title>Main page</title>
 </head>
 <body>
-<div class="container col-10" >
+<div class="container col-10">
     <div>
-        <h2>
+        <h2 style="font-weight:bold;">
             <b>
                 Solver
             </b>
         </h2>
     </div>
+    <hr>
     <div>
         <h3>
             Please select which task you want to solve
         </h3>
     </div>
     <div>
-        <h4>
+        <h5>
             <select onchange="document.location = this.options[this.selectedIndex].value;">
                 <option value="/home">Select</option>
                 <option value="/home/square">Square</option>
                 <option value="/home/strings">Strings</option>
             </select>
-        </h4>
+        </h5>
     </div>
 </div>
 </body>

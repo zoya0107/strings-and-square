@@ -16,78 +16,104 @@
 <div id="main-window" class="container col-10">
     <form th:action="@{/home/strings}" th:object="${strings}" enctype="multipart/form-data" method="POST">
         <div>
-            <h2>
+            <h2 style="font-weight:bold;">
                 <b>
-                    Square
+                    Input Strings
                 </b>
             </h2>
         </div>
+        <hr>
         <div>
             <label style="font-size: medium">Please insert the strings of the first array, separated by spaces: </label>
             <input type="text" style="width:50%;" th:field="*{s1}"
                    class="form-control mb-4 col-4">
         </div>
         <div>
-            <label style="font-size: medium">Please insert the strings of the second array, separated by spaces: </label>
+            <label style="font-size: medium">Please insert the strings of the second array, separated by
+                spaces: </label>
             <input type="text" style="width:50%;" th:field="*{s2}"
                    class="form-control mb-4 col-4">
         </div>
+        <hr>
         <div>
-            <h5 style="color: #0048ff">
+            <h5 style="font-weight:bold;">
                 <b>
                     The substrings are
-                    <input type="text" style="width:5%;" th:value="${result}" readonly="readonly">
+                    <input type="text" style="width:15%;" th:value="${result}" readonly="readonly">
                 </b>
             </h5>
         </div>
-        <br>
+        <hr>
         <div id="controller-bar">
             <table>
                 <tr>
                     <td>
-                        <input type="submit" class="button form-control mb-10 col-15" name="calculate" value="filter" style="background-color: paleturquoise"/>
+                        <input type="submit" class="button form-control mb-10 col-15" name="calculate" value="Filter"
+                               style="background-color: paleturquoise; font-weight:bold; border: white;"/>
                     </td>
                     <td width="10px"></td>
                     <td>
-                        <input type="submit" class="button form-control mb-10 col-15" name="save" value="save" style="background-color: paleturquoise"/>
+                        <input type="submit" class="button form-control mb-10 col-15" name="save" value="Save"
+                               style="background-color: paleturquoise; font-weight:bold; border: white;"/>
                     </td>
                     <td width="10px"></td>
                     <td>
-                        <button id="open" type="button" class = "form-control mb-10 col-15" style="background-color: paleturquoise">load</button>
+                        <button id="open" type="button" class="form-control mb-10 col-15"
+                                style="background-color: paleturquoise; font-weight:bold; border: white;">Load
+                        </button>
                     </td>
                     <td width="10px"></td>
                     <td>
-                        <input type="submit" class="button form-control mb-10 col-15" name="export" value="export" style="background-color: paleturquoise"/>
+                        <input type="submit" class="button form-control mb-10 col-15" name="export" value="Export"
+                               style="background-color: paleturquoise; font-weight:bold; border: white;"/>
+                    </td>
+                    <td width="10px"></td>
+                    <td>
+                        <div>
+                            <a type="button" class="form-control mb-10 col-15"
+                               style="background-color: #eeafaf; font-weight:bold; border: white;" th:href="@{/home}">Back</a>
+                        </div>
                     </td>
                 </tr>
             </table>
         </div>
     </form>
-    <br>
-    <p>
-        <a th:href="@{/home}">Back</a>
-    </p>
     <dialog id="dialog" open style="width: 80%">
+        <table style="width:100%;">
+            <tbody>
+            <tr>
+                <td style="text-align: left;">
+                    <h3>List of saved strings</h3>
+                </td>
+                <td style="text-align: right;">
+                    <button id="close" type="button"
+                            style="background-color: #eeafaf; font-weight:bold; border: white;">X
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <hr>
         <h4>Strings</h4>
         <table class="table table-striped table-responsive-md">
             <thead>
             <tr>
+                <th></th>
                 <th>First array</th>
                 <th>Second array</th>
                 <th>Date</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="strings : ${listStrings}">
-                <td><a th:href="@{/home/strings/{id}(id=${strings.id})}">Select</a></td>
+                <td><a th:href="@{/home/strings/{id}(id=${strings.id})}" class="form-control mb-10 col-3"
+                       style="background-color: #afeeee; font-weight:bold; border: white;">Select</a></td>
                 <td th:text="${strings.s1}"></td>
                 <td th:text="${strings.s2}"></td>
                 <td th:text="${strings.date}"></td>
             </tr>
             </tbody>
         </table>
-        <button type="button" id="close">Close</button>
     </dialog>
 </div>
 </body>
@@ -106,9 +132,11 @@
             dialog.close();
         });
     })();
+
     function preloadFunc() {
         var dialog = document.getElementById('dialog');
         dialog.close();
     }
+
     window.onpaint = preloadFunc();
 </script>

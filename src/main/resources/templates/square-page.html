@@ -17,12 +17,13 @@
     <form th:action="@{/home/square}" th:object="${square}" method="POST">
         <div>
             <div>
-                <h2>
+                <h2 style="font-weight:bold;">
                     <b>
-                        Square
+                        Input Square
                     </b>
                 </h2>
             </div>
+            <hr>
             <div id="input-table">
                 <table>
                     <tr>
@@ -99,54 +100,162 @@
         </div>
         <br>
         <div>
-            <h5 style="color: #0048ff">
+            <div>
+                <h2 style="font-weight:bold;">
+                    <b>
+                        Output Square
+                    </b>
+                </h2>
+            </div>
+            <hr>
+            <div id="output-table">
+                <table>
+                    <tr>
+                        <td>
+                            <div>
+                                <label>Number 1</label>
+                                <input type="text" style="width:40%;" th:value="${resultSquare.a1}"
+                                       class="form-control mb-4 col-4" readonly="readonly">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 2</label>
+                                <input type="text" style="width:40%;" th:value="${resultSquare.a2}"
+                                       class="form-control mb-4 col-4" readonly="readonly">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 3</label>
+                                <input type="text" style="width:40%;" th:value="${resultSquare.a3}"
+                                       class="form-control mb-4 col-4" readonly="readonly">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <label>Number 4</label>
+                                <input type="text" style="width:40%;" th:value="${resultSquare.a4}"
+                                       class="form-control mb-4 col-4" readonly="readonly">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 5</label>
+                                <input type="text" style="width:40%;" th:value="${resultSquare.a5}"
+                                       class="form-control mb-4 col-4" readonly="readonly">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 6</label>
+                                <input type="text" style="width:40%;" th:value="${resultSquare.a6}"
+                                       class="form-control mb-4 col-4" readonly="readonly">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <label>Number 7</label>
+                                <input type="text" style="width:40%;" th:value="${resultSquare.a7}"
+                                       class="form-control mb-4 col-4" readonly="readonly">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 8</label>
+                                <input type="text" style="width:40%;" th:value="${resultSquare.a8}"
+                                       class="form-control mb-4 col-4" readonly="readonly">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>Number 9</label>
+                                <input type="text" style="width:40%;" th:value="${resultSquare.a9}"
+                                       class="form-control mb-4 col-4" readonly="readonly">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div>
+            <h5 style="font-weight:bold;">
                 <b>
                     The cost is
-                    <input type="text" style="width:5%;" th:value="${result}" readonly="readonly">
+                    <input type="text" style="width:5%; " th:value="${result}" readonly="readonly">
                 </b>
             </h5>
         </div>
-        <br>
+        <hr>
         <div id="controller-bar">
             <table>
                 <tr>
                     <td>
                         <input type="submit" class="button form-control mb-10 col-15" name="calculate"
-                               value="make magic" style="background-color: paleturquoise"/>
+                               value="Make magic" style="background-color: #afeeee; font-weight:bold; border: white;"/>
                     </td>
                     <td width="10px"></td>
                     <td>
                         <input type="submit" class="button form-control mb-10 col-15" name="semi-calculate"
-                               value="make semi-magic" style="background-color: paleturquoise"/>
+                               value="Make semi-magic"
+                               style="background-color: #afeeee; font-weight:bold; border: white;"/>
                     </td>
                     <td width="10px"></td>
                     <td>
-                        <input type="submit" class="button form-control mb-10 col-15" name="save" value="save"
-                               style="background-color: paleturquoise"/>
+                        <input type="submit" class="button form-control mb-10 col-15" name="save" value="Save"
+                               style="background-color: #afeeee; font-weight:bold; border: white;"/>
                     </td>
                     <td width="10px"></td>
                     <td>
                         <button id="open" type="button" class="form-control mb-10 col-15"
-                                style="background-color: paleturquoise">load
+                                style="background-color: #afeeee; font-weight:bold; border: white;">Load
                         </button>
                     </td>
                     <td width="10px"></td>
                     <td>
-                        <input type="submit" class="button form-control mb-10 col-15" name="export" value="export"
-                               style="background-color: paleturquoise"/>
+                        <input type="submit" class="button form-control mb-10 col-15" name="export" value="Export"
+                               style="background-color: #afeeee; font-weight:bold; border: white;"/>
+                    </td>
+                    <td width="10px"></td>
+                    <td>
+                        <div>
+                            <a type="button" class="form-control mb-10 col-15"
+                               style="background-color: #eeafaf; font-weight:bold; border: white;" th:href="@{/home}">Back</a>
+                        </div>
                     </td>
                 </tr>
             </table>
         </div>
     </form>
+    <br>
     <dialog id="dialog" open style="width: 80%">
-        <h3>List of saved tasks</h3>
+        <table style="width:100%;">
+            <tbody>
+            <tr>
+                <td style="text-align: left;">
+                    <h3>List of saved tasks</h3>
+                </td>
+                <td style="text-align: right;">
+                    <button id="close" type="button"
+                            style="background-color: #eeafaf; font-weight:bold; border: white;">X
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
         <hr>
         <div style="float:left; width:100%;">
             <h4>Squares</h4>
             <table class="table table-striped table-responsive-md">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>Num. 1</th>
                     <th>Num. 2</th>
                     <th>Num. 3</th>
@@ -157,12 +266,12 @@
                     <th>Num. 8</th>
                     <th>Num. 9</th>
                     <th>Date</th>
-                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="square : ${listSquares}">
-                    <td><a th:href="@{/home/square/{id}(id=${square.id})}">Select</a></td>
+                    <td><a th:href="@{/home/square/{id}(id=${square.id})}" class="form-control mb-10 col-6"
+                           style="background-color: #afeeee; font-weight:bold; border: white;">Select</a></td>
                     <td th:text="${square.a1}"></td>
                     <td th:text="${square.a2}"></td>
                     <td th:text="${square.a3}"></td>
@@ -177,12 +286,7 @@
                 </tbody>
             </table>
         </div>
-        <button type="button" id="close">Close</button>
     </dialog>
-    <br>
-    <p>
-        <a th:href="@{/home}">Back</a>
-    </p>
 </div>
 </body>
 </html>
@@ -200,9 +304,11 @@
             dialog.close();
         });
     })();
+
     function preloadFunc() {
         var dialog = document.getElementById('dialog');
         dialog.close();
     }
+
     window.onpaint = preloadFunc();
 </script>

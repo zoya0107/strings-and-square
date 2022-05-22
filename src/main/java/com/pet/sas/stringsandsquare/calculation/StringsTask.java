@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class StringsTask {
-    public String substrings(StringsModel stringsModel) {
+    public String getSubstrings(StringsModel stringsModel) {
         String s1 = stringsModel.getS1();
         String s2 = stringsModel.getS2();
         String delimiter = " ";
