@@ -33,6 +33,7 @@ public class HomeController {
     @GetMapping("/square")
     public String getPageOne(Model model) {
         model.addAttribute("square", new SquareModel());
+        model.addAttribute("resultSquare", new SquareModel());
         model.addAttribute("listSquares", squareService.getSquaresList());
         return "square-page";
     }
