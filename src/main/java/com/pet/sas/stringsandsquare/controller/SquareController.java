@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -49,14 +50,20 @@ public class SquareController {
 
     @PostMapping(params = "calculate")
     public String calculateCost(@ModelAttribute("square") SquareModel squareModel, Model model) {
-        model.addAttribute("result", squareTask.costOfMagicSquare(squareModel));
+        List<Integer> check = squareTask.toList(squareModel);
+        List<Integer> res = squareTask.getBestOfMagicSquare(squareModel);
+        model.addAttribute("resultSquare", squareTask.toSquare(res));
+        model.addAttribute("result", squareTask.countCost(check, res));
         model.addAttribute("listSquares", squareService.getSquaresList());
         return "square-page";
     }
 
     @PostMapping(params = "semi-calculate")
     public String calculateSemiCost(@ModelAttribute("square") SquareModel squareModel, Model model) {
-        model.addAttribute("result", squareTask.costOfSemiMagicSquare(squareModel));
+        List<Integer> check = squareTask.toList(squareModel);
+        List<Integer> res = squareTask.getBestOfSemiMagicSquare(squareModel);
+        model.addAttribute("resultSquare", squareTask.toSquare(res));
+        model.addAttribute("result", squareTask.countCost(check, res));
         model.addAttribute("listSquares", squareService.getSquaresList());
         return "square-page";
     }
@@ -65,7 +72,11 @@ public class SquareController {
     public String exportTheSquare(@ModelAttribute("square") SquareModel squareModel,
                                   @ModelAttribute("type") TypeModel typeModel, Model model) {
         typeModel.setType(TaskType.SQUARE);
-        File file = new File("target/square.json");
+        File theDir = new File("C://data_sas");
+        if (!theDir.exists()) {
+            theDir.mkdirs();
+        }
+        File file = new File(theDir, "square.json");
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> taskMap = new HashMap<>();
         taskMap.put("numbers", squareModel);
@@ -77,6 +88,8 @@ public class SquareController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        List<Integer> res = squareTask.getBestOfSemiMagicSquare(squareModel);
+        model.addAttribute("resultSquare", squareTask.toSquare(res));
         model.addAttribute("listSquares", squareService.getSquaresList());
         return "square-page";
     }
@@ -85,6 +98,7 @@ public class SquareController {
     public String solveSquare(@PathVariable(value = "id") Long id, Model model) {
         SquareModel squareModel = squareService.getSquareById(id);
         model.addAttribute("square", squareModel);
+        model.addAttribute("resultSquare", new SquareModel());
         model.addAttribute("listSquare", squareService.getSquaresList());
         return "square-page";
     }
