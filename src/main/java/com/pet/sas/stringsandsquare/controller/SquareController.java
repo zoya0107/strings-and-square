@@ -13,13 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.apache.commons.io.IOUtils.copy;
 
 @Controller
 @RequestMapping(path = "/home/square")
@@ -69,18 +70,20 @@ public class SquareController {
     }
 
     @PostMapping(params = "export")
-    public String exportTheSquare(@ModelAttribute("square") SquareModel squareModel,
-                                  @ModelAttribute("type") TypeModel typeModel, Model model) {
+    public void exportSquareToJsonFile(@ModelAttribute("square") SquareModel squareModel,
+                                       @ModelAttribute("type") TypeModel typeModel,
+                                       HttpServletResponse response) {
         typeModel.setType(TaskType.SQUARE);
-        File theDir = new File("C://data_sas");
-        if (!theDir.exists()) {
-            theDir.mkdirs();
-        }
-        File file = new File(theDir, "square.json");
+
+        response.setContentType("application/json");
+        response.setHeader("Content-Disposition", "attachment; filename=\"square.json\"");
+
+        File file = new File("square.json");
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> taskMap = new HashMap<>();
         taskMap.put("numbers", squareModel);
         taskMap.put("task", typeModel);
+
         try {
             JsonGenerator g = objectMapper.getFactory().createGenerator(new FileOutputStream(file));
             objectMapper.writeValue(g, taskMap);
@@ -88,14 +91,18 @@ public class SquareController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        List<Integer> res = squareTask.getBestOfSemiMagicSquare(squareModel);
-        model.addAttribute("resultSquare", squareTask.toSquare(res));
-        model.addAttribute("listSquares", squareService.getSquaresList());
-        return "square-page";
+
+        try {
+            InputStream is = new FileInputStream(file);
+            copy(is, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException ex) {
+            throw new RuntimeException("IOError writing file to output stream");
+        }
     }
 
     @GetMapping("/{id}")
-    public String solveSquare(@PathVariable(value = "id") Long id, Model model) {
+    public String chooseSquare(@PathVariable(value = "id") Long id, Model model) {
         SquareModel squareModel = squareService.getSquareById(id);
         model.addAttribute("square", squareModel);
         model.addAttribute("resultSquare", new SquareModel());
