@@ -2,6 +2,8 @@
 Spring MVC web application for solving “magic square” and “filter the strings” tasks.
 ## Description
 In this application a user can find the minimal “cost” of converting a square 3*3 of integers into a magic[1] or semi-magic[2] one and filter an array of strings so as to leave only strings which are substrings of the strings in the second array. The application is written using Spring MVC framework and Maven for external dependency management.
+## Link to the app on Heroku
+[Strings and Square Solver](https://strings-and-square.herokuapp.com/home)
 ## Database & configuration
 - PostgreSQL
 - Maven
