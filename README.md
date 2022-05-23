@@ -18,7 +18,7 @@ In this application a user can find the minimal “cost” of converting a squar
 2. To solve the task user needs to insert the values and click “Make magic”, “Make semi-magic” or “Filter”
 3. To save the task data to the database user should click “Save”
 4. To solve the task already saved to the database, user needs to click “Load” and then choose the task in the dialog window by clicking “Select”. Now the task fields are filled with the chosen values, and the task can be solved as described in the second step
-5. To export the task as json file, user should click “export”. A file “square.json” or “strings.json” will be saved to the "C://data_sas" directory, if there is no such directory, it will be created
+5. To export the task as json file, user should click “export”
 
 [1] a magic square is a matrix of distinct positive integers from 1 to n^2 where the sum of any row, column, or diagonal is always equal to the same number
 

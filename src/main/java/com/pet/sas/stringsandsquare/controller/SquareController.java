@@ -106,7 +106,7 @@ public class SquareController {
         SquareModel squareModel = squareService.getSquareById(id);
         model.addAttribute("square", squareModel);
         model.addAttribute("resultSquare", new SquareModel());
-        model.addAttribute("listSquare", squareService.getSquaresList());
+        model.addAttribute("listSquares", squareService.getSquaresList());
         return "square-page";
     }
 }

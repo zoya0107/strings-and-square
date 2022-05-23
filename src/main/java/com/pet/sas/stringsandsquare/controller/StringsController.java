@@ -12,12 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.apache.commons.io.IOUtils.copy;
 
 @Controller
 @RequestMapping(path = "/home/strings")
@@ -53,18 +54,20 @@ public class StringsController {
     }
 
     @PostMapping(params = "export")
-    public String exportTheStrings(@ModelAttribute("strings") StringsModel stringsModel,
-                                   @ModelAttribute("type") TypeModel typeModel, Model model) {
+    public void exportStringsToJsonFile(@ModelAttribute("strings") StringsModel stringsModel,
+                                        @ModelAttribute("type") TypeModel typeModel,
+                                        HttpServletResponse response) {
         typeModel.setType(TaskType.STRINGS);
-        File theDir = new File("C://data_sas");
-        if (!theDir.exists()) {
-            theDir.mkdirs();
-        }
-        File file = new File(theDir, "strings.json");
+
+        response.setContentType("application/json");
+        response.setHeader("Content-Disposition", "attachment; filename=\"strings.json\"");
+
+        File file = new File("strings.json");
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> taskMap = new HashMap<>();
         taskMap.put("strings", stringsModel);
         taskMap.put("task", typeModel);
+
         try {
             JsonGenerator g = objectMapper.getFactory().createGenerator(new FileOutputStream(file));
             objectMapper.writeValue(g, taskMap);
@@ -72,8 +75,14 @@ public class StringsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        model.addAttribute("listStrings", stringsService.getStringsList());
-        return "strings-page";
+
+        try {
+            InputStream is = new FileInputStream(file);
+            copy(is, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException ex) {
+            throw new RuntimeException("IOError writing file to output stream");
+        }
     }
 
     @GetMapping("/{id}")
